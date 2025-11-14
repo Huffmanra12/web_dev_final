@@ -1,23 +1,19 @@
-import { useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import MerchantSidebar from "./MerchantSideBar";
 import MerchantItems from "./Merchant_items";
+import { MerchantProfile } from "./merchant_profile";
 
 export function MerchantHome() {
-  const [currentPage, setCurrentPage] = useState("My-Items");
-
   return (
-    <div className="flex">
-      <aside>
-        <MerchantSidebar
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
+    <div className="flex min-h-screen w-screen">
+      <aside className="w-64 min-h-screen">
+        <MerchantSidebar />
       </aside>
 
-      <main className="flex-1 p-4">
+      <main className="flex-1 min-h-screen flex justify-center items-center p-4">
         <Routes>
-          <Route index element={<MerchantItems />} />
+          <Route index element={<MerchantProfile />} />
+          <Route path="my-profile" element={<MerchantProfile />} />
           <Route path="my-items" element={<MerchantItems />} />
         </Routes>
       </main>

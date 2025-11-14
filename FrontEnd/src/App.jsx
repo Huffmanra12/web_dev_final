@@ -15,30 +15,32 @@ function App() {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route
-        path="/login"
-        element={
-          user ? (
-            user.account_type === "merchant" ? (
-              <Navigate to="/merchant-home/*" replace />
+    <div>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route
+          path="/login"
+          element={
+            user ? (
+              user.account_type === "merchant" ? (
+                <Navigate to="/merchant-home/my-profile" replace />
+              ) : (
+                <Navigate to="/user-home/*" replace />
+              )
             ) : (
-              <Navigate to="/user-home/*" replace />
+              <Login />
             )
-          ) : (
-            <Login />
-          )
-        }
-      />
+          }
+        />
 
-      <Route path="/create-account" element={<CreateAccount />} />
-      <Route path="/account-created" element={<AccountCreated />} />
-      <Route element={<ProtectedRoute />}>
-        <Route path="/user-home/*" element={<UserHome />} />
-        <Route path="/merchant-home/*" element={<MerchantHome />} />
-      </Route>
-    </Routes>
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/account-created" element={<AccountCreated />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/user-home/*" element={<UserHome />} />
+          <Route path="/merchant-home/*" element={<MerchantHome />} />
+        </Route>
+      </Routes>
+    </div>
   );
 }
 

@@ -4,6 +4,7 @@ import {
   SidebarItem,
   SidebarItemGroup,
   SidebarItems,
+  Button,
 } from "flowbite-react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -16,8 +17,8 @@ function MerchantSidebar({ currentPage, setCurrentPage }) {
       <SidebarItems>
         <p>Huffmans Store</p>
         <SidebarItemGroup>
-          <SidebarItem onClick={() => setCurrentPage("Welcome")}>
-            Welcome
+          <SidebarItem onClick={() => Navigate("/merchant-home/my-profile")}>
+            My Profile
           </SidebarItem>
           <SidebarItem onClick={() => Navigate("/merchant-home/my-items")}>
             My Items
@@ -30,7 +31,9 @@ function MerchantSidebar({ currentPage, setCurrentPage }) {
           </SidebarItem>
         </SidebarItemGroup>
         <SidebarItemGroup>
-          <SidebarItem onClick={() => signOut()}>Sign out</SidebarItem>
+          <SidebarItem onClick={() => signOut()}>
+            <Button>Sign out</Button>
+          </SidebarItem>
         </SidebarItemGroup>
       </SidebarItems>
     </Sidebar>
