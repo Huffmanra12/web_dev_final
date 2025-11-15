@@ -10,14 +10,13 @@ import { useAuth } from "../../hooks/useAuth";
 function MerchantItems() {
   const { user } = useAuth();
   const [items, setItems] = useState([]);
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
 
-  //If statment checks to ensure that items contains data by ensuring it has a lenght thats not less than 1.
+  //If statment checks to ensure that items contains data by ensuring it has a length thats not less than 1.
 
   const reload = async () => {
     try {
       const itemsData = await GetMerchantItems(user.id);
-      console.log(itemsData);
       setItems(itemsData);
     } catch (err) {
       console.error("Fetch Error", err);
@@ -56,7 +55,13 @@ function MerchantItems() {
             <p>{e.item_name}</p>
             <p className="max-w-md break-all">{shortDesc}</p>
             <p>Price: ${e.item_price}</p>
-            <Button>Select Item</Button>
+            <Button
+              onClick={() =>
+                Navigate(`/merchant-home/my-items/${e.id}`, { state: e })
+              }
+            >
+              Select Item
+            </Button>
           </Card>
         );
       })}

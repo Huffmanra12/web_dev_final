@@ -1,7 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import MerchantSidebar from "./MerchantSideBar";
-import MerchantItems from "./Merchant_items";
+import MerchantSidebar from "./merchant_sidebar";
+import MerchantItems from "./merchant_items";
 import { MerchantProfile } from "./merchant_profile";
+import AddItem from "./add_item";
+import { EditItem } from "./edit_item";
 
 export function MerchantHome() {
   return (
@@ -15,6 +17,8 @@ export function MerchantHome() {
           <Route index element={<MerchantProfile />} />
           <Route path="my-profile" element={<MerchantProfile />} />
           <Route path="my-items" element={<MerchantItems />} />
+          <Route path="add-item" element={<AddItem />} />
+          <Route path="my-items/:itemID" element={<EditItem />} />
         </Routes>
       </main>
     </div>

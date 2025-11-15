@@ -1,4 +1,3 @@
-//component that renders the add item form and submits it to the backend.
 import {
   Card,
   Button,
@@ -7,37 +6,19 @@ import {
   TextInput,
   Textarea,
 } from "flowbite-react";
-import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
-function AddItem({ user, updateItems }) {
-  const [itemName, setItemName] = useState("");
-  const [itemDesc, setItemDesc] = useState("");
-  const [price, setItemPrice] = useState("");
-  const userID = user[0].id;
-
-//when submit is clicked on the form this runs peforming a POST and submitting the data to the backend to be added to the database
+export function EditItem() {
+  const { state: item } = useLocation();
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    await fetch("http://localhost:8080/addItems", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        item_name: itemName,
-        item_desc: itemDesc,
-        item_price: price,
-        id: userID,
-      }),
-    }).then((res) =>
-      res.json().then((data) => {
-        setItemName("");
-        setItemDesc("");
-        setItemPrice("");
-
-        updateItems();
-      })
-    );
+    console.log(item);
   };
+  if (!item)
+    return (
+      <Card>
+        <div>No Item Passed</div>
+      </Card>
+    );
   return (
     <>
       <div className="flex items-center justify-center min-h-screen ">
@@ -52,7 +33,7 @@ function AddItem({ user, updateItems }) {
                 id="ItemName"
                 type="text"
                 placeholder="Type Item Name"
-                value={itemName}
+                value={item.item_name}
                 onChange={(e) => setItemName(e.target.value)} //all on changes will update the value of the defined variable at the top to be loaded into the fetch that performs the post
                 required
               />
@@ -66,12 +47,12 @@ function AddItem({ user, updateItems }) {
                 placeholder="Type Description"
                 rows={5}
                 maxLength={500}
-                value={itemDesc}
+                value={item.item_description}
                 onChange={(e) => setItemDesc(e.target.value)}
                 required
               />
             </div>
-            <div>
+            <div className="flex gap-4">
               <div className="mb-2">
                 <Label>Price</Label>
               </div>
@@ -82,17 +63,31 @@ function AddItem({ user, updateItems }) {
                 placeholder="0"
                 min="0"
                 step="0.01"
-                value={price}
+                value={item.item_price}
                 onChange={(e) => setItemPrice(e.target.value)}
                 required
               />
+              <div>
+                <Label>Item Stock</Label>
+              </div>
+              <div>
+                <TextInput
+                  className="w-20"
+                  id="Stock"
+                  type="number"
+                  placeholder="0"
+                  min="0"
+                  step="1"
+                  value={item.inventory_count}
+                  onChange={(e) => setItemStock(e.target.value)}
+                  required
+                />
+              </div>
             </div>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Update Item</Button>
           </form>
         </Card>
       </div>
     </>
   );
 }
-//esports AddItem to be used in the application
-export default AddItem;

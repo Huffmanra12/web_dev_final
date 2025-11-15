@@ -7,7 +7,14 @@ const SALT_ROUNDS = 12;
 export async function getById(id) {
   return knex(TABLE)
     .where({ id })
-    .first("id", "email", "username", "created_at", "updated_at");
+    .first(
+      "id",
+      "email",
+      "username",
+      "account_type",
+      "created_at",
+      "updated_at"
+    );
 }
 
 export async function authUser(userCred) {

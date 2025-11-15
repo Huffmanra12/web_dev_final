@@ -23,7 +23,7 @@ function MerchantSidebar({ currentPage, setCurrentPage }) {
           <SidebarItem onClick={() => Navigate("/merchant-home/my-items")}>
             My Items
           </SidebarItem>
-          <SidebarItem onClick={() => setCurrentPage("AddItems")}>
+          <SidebarItem onClick={() => Navigate("/merchant-home/add-item")}>
             Add Items
           </SidebarItem>
           <SidebarItem onClick={() => setCurrentPage("Metrics")}>

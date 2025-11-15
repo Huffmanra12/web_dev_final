@@ -12,3 +12,8 @@ export const getByMerchant = asyncHandler(async (req, res) => {
   if (!items) return res.status(404).json({ error: "Not Found" });
   res.json(items);
 });
+
+export const addItemCtrl = asyncHandler(async (req, res) => {
+  const created = await svc.addItemSvc(req.validated);
+  res.status(201).json(created);
+});
